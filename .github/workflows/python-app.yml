@@ -83,5 +83,6 @@ jobs:
           export KUBECONFIG=$PWD/kubeconfig
           kubectl apply -f deployment.yaml
           kubectl get pods
+          kubecrtl get nodes
 
       
