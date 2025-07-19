@@ -72,4 +72,15 @@ jobs:
           image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/py-game:latest
           format: 'table'
 
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.28.1'
+
+      - name: Deploy to Kubernetes
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
+          kubectl apply -f deployment.yaml
+
       
